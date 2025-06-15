@@ -1,0 +1,73 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container mt-5">
+    <h2 class="mb-4">Search Attendance</h2>
+
+    <!-- Flash messages -->
+    {% with messages = get_flashed_messages(with_categories=true) %}
+      {% if messages %}
+        {% for category, message in messages %}
+          <div class="alert alert-{{ category }} alert-dismissible fade show" role="alert">
+            {{ message }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+          </div>
+        {% endfor %}
+      {% endif %}
+    {% endwith %}
+
+    <!-- Search Form -->
+    <form method="GET" class="row g-3 align-items-center mb-4">
+        <div class="col-auto">
+            <label for="date" class="form-label">Select Date:</label>
+            <input type="date" id="date" name="date" class="form-control" required>
+        </div>
+        <div class="col-auto">
+            <label for="status" class="form-label">Status:</label>
+            <select name="status" id="status" class="form-select">
+                <option value="">All</option>
+                <option value="Present">Present</option>
+                <option value="Late">Late</option>
+                <option value="Absent">Absent</option>
+            </select>
+        </div>
+        <div class="col-auto mt-4">
+            <button type="submit" class="btn btn-primary">Search</button>
+        </div>
+    </form>
+
+    <!-- Results Table -->
+    {% if records %}
+    <table class="table table-bordered">
+        <thead class="table-dark">
+            <tr>
+                <th>Employee Name</th>
+                <th>Status</th>
+                <th>Date</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for a in records %}
+            <tr>
+                <td>{{ a.employee.name }}</td>
+                <td>
+                    {% if a.status == 'Late' %}
+                        <span class="badge bg-warning text-dark">Late</span>
+                    {% elif a.status == 'Absent' %}
+                        <span class="badge bg-danger">Absent</span>
+                    {% else %}
+                        <span class="badge bg-success">Present</span>
+                    {% endif %}
+                </td>
+                <td>{{ a.date.strftime('%d %b %Y') }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% else %}
+        {% if request.args %}
+            <div class="alert alert-info mt-3">No attendance records found for selected criteria.</div>
+        {% endif %}
+    {% endif %}
+</div>
+{% endblock %}

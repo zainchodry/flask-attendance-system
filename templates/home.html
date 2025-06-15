@@ -1,0 +1,64 @@
+{% extends 'base.html' %}
+{% block title %}🏢 Employee Attendance System{% endblock %}
+
+{% block content %}
+<style>
+  .hero-section {
+    background: linear-gradient(135deg, #0d6efd, #6610f2);
+    color: white;
+    padding: 60px 20px;
+    border-radius: 1rem;
+    box-shadow: 0 0 30px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    margin-bottom: 40px;
+  }
+
+  .btn-animated {
+    transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+  }
+
+  .btn-animated:hover {
+    transform: scale(1.05);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+  }
+
+  .icon {
+    font-size: 2rem;
+    margin-right: 10px;
+  }
+
+  .btn-custom {
+    width: 100%;
+    max-width: 400px;
+    font-size: 1.2rem;
+    padding: 15px 25px;
+  }
+</style>
+
+<div class="hero-section">
+  <h1 class="display-4 fw-bold">✨ Employee Attendance System</h1>
+  <p class="lead mt-3">Track. Manage. Optimize. Your workplace, made smarter.</p>
+</div>
+
+<div class="container d-flex flex-column align-items-center">
+  <a href="{{ url_for('view_employees') }}" class="btn btn-outline-primary btn-custom btn-animated m-2">
+    <i class="icon bi bi-people"></i> View Employees
+  </a>
+  <a href="{{ url_for('add_employee') }}" class="btn btn-outline-secondary btn-custom btn-animated m-2">
+    <i class="icon bi bi-person-plus"></i> Add Employee
+  </a>
+  <a href="{{ url_for('mark_attendance') }}" class="btn btn-outline-success btn-custom btn-animated m-2">
+    <i class="icon bi bi-clipboard-check"></i> Mark Attendance
+  </a>
+  <a href="{{ url_for('search_attendance') }}" class="btn btn-outline-warning btn-custom btn-animated m-2">
+    <i class="icon bi bi-search"></i> Search Attendance
+  </a>
+  <a href="{{ url_for('attendance_report') }}" class="btn btn-outline-info btn-custom btn-animated m-2">
+    <i class="icon bi bi-bar-chart-line"></i> Attendance Report
+  </a>
+  <a href="/delete-employee/" class="btn btn-outline-danger btn-custom btn-animated m-2">
+    <i class="bi bi-trash-fill me-1"></i> Delete Attendance
+  </a>  
+</div>
+
+{% endblock %}

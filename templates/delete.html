@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+{% block title %}🗑️ Delete Attendance{% endblock title %}
+
+{% block content %}
+<div class="container py-5">
+    <div class="text-center mb-5">
+        <h1 class="display-4 fw-bold text-danger">🗑️ Delete Employee Attendance</h1>
+        <p class="lead text-muted">Be careful! Once deleted, attendance records cannot be recovered.</p>
+        <hr class="w-25 mx-auto">
+    </div>
+
+    <div class="card shadow-lg border-0 rounded-4">
+        <div class="card-body p-5">
+            <div class="dropdown text-center">
+                <button class="btn btn-lg btn-danger dropdown-toggle px-5 py-3 fw-bold" type="button"
+                        id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+                    👤 Select Employee to Delete
+                </button>
+                <ul class="dropdown-menu dropdown-menu-lg-start shadow" aria-labelledby="dropdownMenuButton">
+                    {% for i in employees %}
+                    <li>
+                        <a class="dropdown-item py-2 fs-5" href="/delete-employee/{{ i.id }}">
+                            🧑 {{ i.name }}
+                        </a>
+                    </li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="text-center mt-4">
+        <p class="text-muted fst-italic">Choose wisely. Your actions are irreversible. 🔒</p>
+    </div>
+</div>
+
+<style>
+    .btn-danger:hover {
+        transform: scale(1.05);
+        transition: all 0.3s ease-in-out;
+        box-shadow: 0 10px 20px rgba(255, 0, 0, 0.3);
+    }
+    .dropdown-menu a:hover {
+        background-color: #f8d7da;
+        color: #842029;
+        font-weight: bold;
+    }
+</style>
+{% endblock content %}

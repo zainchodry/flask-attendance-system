@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2>Mark Today's Attendance</h2>
+
+<form method="POST">
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Department</th>
+                <th>Status</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for emp in employees %}
+            <tr>
+                <td>{{ emp.name }}</td>
+                <td>{{ emp.department }}</td>
+                <td>
+                    <select name="status_{{ emp.id }}" class="form-select">
+                        <option value="">-- Select --</option>
+                        <option value="Present">Present</option>
+                        <option value="Absent">Absent</option>
+                    </select>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <button type="submit" class="btn btn-primary">Submit Attendance</button>
+</form>
+{% endblock %}

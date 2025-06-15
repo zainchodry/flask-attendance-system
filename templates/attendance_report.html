@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container mt-5">
+    <h2 class="mb-4">Attendance Report</h2>
+
+    <!-- Flash messages -->
+    {% with messages = get_flashed_messages(with_categories=true) %}
+      {% if messages %}
+        {% for category, message in messages %}
+          <div class="alert alert-{{ category }} alert-dismissible fade show" role="alert">
+            {{ message }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+          </div>
+        {% endfor %}
+      {% endif %}
+    {% endwith %}
+
+    <table class="table table-bordered">
+        <thead class="table-dark">
+            <tr>
+                <th>Employee Name</th>
+                <th>Status</th>
+                <th>Date</th>
+                <th>Marked Time</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for a in attendance %}
+            <tr>
+                <td>{{ a.employee.name }}</td>
+                <td>
+                    {% if a.status == 'Late' %}
+                        <span class="badge bg-warning text-dark">Present - Late</span>
+                    {% elif a.status == 'In Time' %}
+                        <span class="badge bg-success">Present - In Time</span>
+                    {% elif a.status == 'Absent' %}
+                        <span class="badge bg-danger">Absent</span>
+                    {% else %}
+                        <span class="badge bg-primary">{{ a.status }}</span>
+                    {% endif %}
+                </td>
+                <td>{{ a.date.strftime('%d %b %Y') }}</td>
+                <td>
+                    {% if a.timestamp %}
+                        {{ a.timestamp.strftime('%I:%M %p') }}
+                    {% else %}
+                        -
+                    {% endif %}
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

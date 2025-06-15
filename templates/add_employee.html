@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+{% block title %}Add Employee{% endblock %}
+
+{% block content %}
+<h2>Add New Employee</h2>
+
+<form method="POST">
+    <div class="mb-3">
+        <label for="name" class="form-label">Employee Name</label>
+        <input type="text" class="form-control" name="name" required>
+    </div>
+    <div class="mb-3">
+        <label for="department" class="form-label">Department</label>
+        <input type="text" class="form-control" name="department" required>
+    </div>
+    <button type="submit" class="btn btn-primary">Add Employee</button>
+    <a href="{{ url_for('home') }}" class="btn btn-secondary">Cancel</a>
+</form>
+{% endblock %}
